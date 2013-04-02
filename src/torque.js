@@ -88,7 +88,7 @@ Torque.modules.layer = function (torque) {
                 blendmode:'source-over',
                 trails:false,
                 point_type:'square',
-                subtitles:false
+                subtitles:true
             }
             this.options = _.defaults(options, this._defaults);
 
@@ -110,9 +110,13 @@ Torque.modules.layer = function (torque) {
         pause:function () {
             if (this.running == true) {
                 this.running = false;
+
+                //this is really a lousy thing to do. Apologies
+                $('.property-name').text('play');
             } else {
                 this.running = true;
                 this.play();
+                $('.property-name').text('pause');
             }
         },
         setOptions:function (new_options) {
@@ -214,7 +218,7 @@ Torque.modules.layer = function (torque) {
 
             var date = new Date(this._current * 1000);
             var date_arry = date.toString().substr(4).split(' ');
-            torque.clock.set('<span id="month">' + date_arry[0] + '</span> <span id="year">' + date_arry[2] + '</span>');
+            torque.clock.set('<span id="day">' + date_arry[1] + '</span> <span id="month">' + date_arry[0] + '</span> <span id="year">' + date_arry[2] + '</span>');
 
             if (this.options.subtitles) {
                 torque.subtitles.set(date);
@@ -252,46 +256,64 @@ Torque.modules.subtitles = function (torque) {
     torque.subtitles = {
         subs:[
             {
-                from:new Date("March 01, 1913 00:00:00"),
-                to:new Date("July 01, 1914 00:00:00"),
-                sub:"Pre war"
-            },
-            {
-                from:new Date("August 01, 1914 00:00:00"),
-                to:new Date("February 01, 1915 00:00:00"),
-                sub:"War begins with Germany"
-            },
-            {
-                from:new Date("February 02, 1915 00:00:00"),
-                to:new Date("October 01, 1916 00:00:00"),
-                sub:"North Sea naval blockade"
-            },
-            {
-                from:new Date("October 02, 1917 00:00:00"),
-                to:new Date("April 01, 1917 00:00:00"),
-                sub:"Atlantic U-boat warfare"
-            },
-            {
-                from:new Date("April 02, 1917 00:00:00"),
-                to:new Date("September 01, 1917 00:00:00"),
-                sub:"USA enters war"
-            },
-            {
-                from:new Date("September 02, 1917 00:00:00"),
-                to:new Date("November 01, 1918 00:00:00"),
-                sub:"Destroyers begin to escort convoys in Atlantic"
-            },
-            {
-                from:new Date("November 02, 1918 00:00:00"),
-                to:new Date("August 01, 1920 00:00:00"),
-                sub:"End of WWI"
-            },
-            {
-                from:new Date("August 02, 1920 00:00:00"),
-                to:new Date("August 01, 1925 00:00:00"),
-                sub:"Trade routes resume"
+                from:new Date("July 15, 2012 00:00:00"),
+                to:new Date("August 5, 2012 00:00:00"),
+                sub:"Wet season."
             }
-
+            ,
+            {
+                from:new Date("August 6, 2012 00:00:00"),
+                to:new Date("September 10, 2012 00:00:00"),
+                sub:"That's when there are the least power cuts."
+            }
+            ,
+            {
+                from:new Date("October 15, 2012 00:00:00"),
+                to:new Date("October 20, 2012 00:00:00"),
+                sub:"Dry season begins."
+            }
+            ,
+            {
+                from:new Date("November 5, 2012 00:00:00"),
+                to:new Date("November 10, 2012 00:00:00"),
+                sub:"Riots over power cuts in Douala. Protestors build barricades."
+            }
+            ,
+            {
+                from:new Date("November 28, 2012 00:00:00"),
+                to:new Date("December 4, 2012 00:00:00"),
+                sub:"Feowl launches."
+            }
+            ,
+            {
+                from:new Date("December 15, 2012 00:00:00"),
+                to:new Date("December 24, 2012 00:00:00"),
+                sub:"Kribi power plant fails to open as planned."
+            }
+            ,
+            {
+                from:new Date("December 25, 2012 00:00:00"),
+                to:new Date("January 1, 2013 00:00:00"),
+                sub:"First tests using diesel at the Kribi power plant."
+            }
+            ,
+            {
+                from:new Date("February 18, 2013 00:00:00"),
+                to:new Date("February 26, 2013 00:00:00"),
+                sub:"Pipeline for gas to Kribi power plant completed."
+            }
+            ,
+            {
+                from:new Date("March 1, 2013 00:00:00"),
+                to:new Date("March 5, 2013 00:00:00"),
+                sub:"8 kids die in a fire. They used candles during a power cut."
+            }
+            ,
+            {
+                from:new Date("March 23, 2013 00:00:00"),
+                to:new Date("March 28, 2013 00:00:00"),
+                sub:"Kribi power plant enters service."
+            }
         ]
     };
 

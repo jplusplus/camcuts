@@ -1,0 +1,62 @@
+.header-title {
+    font-size: 20px;
+    text-transform: uppercase;
+    background: #FFF;
+    padding: 5px;
+    box-shadow: none !important;
+    border:none;
+    max-height: 60px;
+}
+
+.dg.ac {
+	top:60px;
+}
+
+.close-button {
+	display: none;
+}
+
+.dg .cr.function {
+    border-left: 3px solid #B4131D;
+}
+
+.red-border {
+	border-bottom: 4px solid #B4131D;
+}
+
+.header-title h1 {
+	font-size: 20px;
+	margin:0;
+	padding: 0;
+	font-family: 'Roboto';
+	font-weight: 900;
+	display: inline;
+}
+
+.torque_subs {
+	display: inline
+	font-weight: normal;
+	font-family: 'Roboto';
+	font-size: 12px;
+}
+
+.navbar-inner {
+	max-height: 30px !important;
+	margin-top: 0 !important;
+}
+
+#map_canvas {
+	height: 80%;
+}
+
+.lighter {
+	color: #CCC;
+}
+
+.margin-top {
+	margin-top: 30px;
+}
+
+.pull-right {
+	margin: 10px;
+}
