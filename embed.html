@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <title>Power cuts in Cameroon August 2012 - March 2013</title>
+    <meta content="Cameroon: See what 8,000 power cuts look like." name="description">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="http://jplusplus.github.com/camcuts/images/fb-image.jpg" property="og:image">
+    <meta content="http://jplusplus.github.com/camcuts/" property="og:url'">
+    <meta content="8,000 power cuts in Cameroon" property="og:title'">
+    <link rel="shortcut icon" href="http://jplusplus.org/images/favicon.png" />
+    <link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="lib/cartodb.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="lib/wax.g.js"></script>
+    <script type="text/javascript" src="lib/cartodb-gmapsv3.js"></script>
+    <script type="text/javascript" src="lib/dat.gui.min.js"></script>
+    <script type="text/javascript" src="lib/underscore-min.js"></script>
+    <script type="text/javascript" src="lib/backbone.js"></script>
+    <script type="text/javascript" src="lib/class.js"></script>
+    <script type="text/javascript" src="lib/backbone.cartodb.js"></script>
+    <script type="text/javascript" src="src/canvas_tile_layer.js"></script>
+    <script type="text/javascript" src="src/grid_layer.js"></script>
+    <script type="text/javascript" src="src/torque.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,900' rel='stylesheet' type='text/css'>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="src/styles-embed.css" />
+    <script type="text/javascript">
+    var gui;
+    function initialize() {
+        // initialise the google map
+        var map = new google.maps.Map(document.getElementById('map_canvas'), {
+            center:new google.maps.LatLng(6,12),
+            zoom:6,
+            mapTypeId:google.maps.MapTypeId.SATELLITE,
+            mapTypeControl:false,
+            minZoom:1
+        });
+
+        var map_style = {};
+        map_style.google_maps_customization_style = [
+            {
+                stylers:[
+                    { invert_lightness:true },
+                    { weight:1 },
+                    { saturation:-100 },
+                    { lightness:-40 }
+                ]
+            }
+        ];
+
+        var Soft = function () {
+            this.Soft = function () {
+                map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+                map.setOptions({styles:map_style.google_maps_customization_style});
+            }
+        }
+
+        map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+        map.setOptions({styles:map_style.google_maps_customization_style});
+
+        var TorqueOptions = {
+            user:'nkb',
+            table:'cuts',
+            column:'date_cut',
+            steps:750,
+            resolution:2,
+            cumulative:false,
+            clock:true,
+            fps:20,
+            fitbounds:false,
+            blendmode:'lighter',
+            trails:true,
+            point_type:'circle',
+            cellsize:1
+        }
+
+        var torque = null;
+        Torque(function (env) {
+            Torque.app = new env.app.Instance();
+            torque = new Torque.app.addLayer(map, TorqueOptions);
+            Torque.env = env;
+        });
+
+        dat.GUI.DEFAULT_WIDTH = 300;
+        var toggle = new dat.GUI();
+        
+        var pause = function () {
+            this.pause = function () {
+                torque.pause();
+            }
+        }
+
+        toggle.add(new pause(), 'pause');
+
+        var blend_modes = [
+            "lighter",
+            "source-over",
+            "copy",
+            "destination-atop",
+            "destination-in",
+            "destination-out",
+            "destination-over",
+            "source-atop",
+            "source-in",
+            "source-out",
+            "xor"
+        ];
+
+
+    }
+    </script>
+</head>
+    <body onload="initialize()">
+        <div class="navbar navbar-fixed-top header-title red-border">
+            <div class="navbar-inner header-title">
+                <div class="pull-right top10">
+                    <a class="right20" target="_blank" href="http://jplusplus.org/">
+                        <img alt="Journalism++" src="http://www.desdonneespourlautisme.fr/images/jpp.png">
+                    </a>
+                </div>
+                <h1>Power cuts in Cameroon <span class="lighter">on </span><span class="torque_time lighter"></span></h1><br/><span class="torque_subs lighter"></span>
+            </div>
+        </div>
+        <div id="map_canvas"></div>
+    </body>
+</html>

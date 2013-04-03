@@ -280,12 +280,6 @@ Torque.modules.subtitles = function (torque) {
             }
             ,
             {
-                from:new Date("November 28, 2012 00:00:00"),
-                to:new Date("December 4, 2012 00:00:00"),
-                sub:"Feowl launches."
-            }
-            ,
-            {
                 from:new Date("December 15, 2012 00:00:00"),
                 to:new Date("December 24, 2012 00:00:00"),
                 sub:"Kribi power plant fails to open as planned."
